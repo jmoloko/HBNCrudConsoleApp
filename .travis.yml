@@ -1,7 +1,5 @@
 language: java
 jdk:
-  - oraclejdk8
-  - oraclejdk11
   - oraclejdk15
 
 sudo: false
@@ -15,3 +13,7 @@ notifications:
       - jackmoloko@yandex.ru
     on_success: never
     on_failure: always
+
+env:
+  global:
+    - CODECOV_TOKEN='e71fb522-e917-4294-a703-ebed8319e45d'

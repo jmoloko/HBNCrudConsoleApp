@@ -1,5 +1,8 @@
 ### HBNCrudConsoleApp
 
+
+[![codecov](https://codecov.io/gh/jmoloko/HBNCrudConsoleApp/branch/main/graph/badge.svg?token=O0DQU9I1AI)](https://codecov.io/gh/jmoloko/HBNCrudConsoleApp)
+
 **Console CRUD application with Hibernate**
 
 Console CRUD application that interacts with the database and allows you to perform all CRUD operations on entities:
