@@ -1,6 +1,6 @@
 ### HBNCrudConsoleApp
 
-
+[![Build Status](https://app.travis-ci.com/jmoloko/HBNCrudConsoleApp.svg?branch=main)](https://app.travis-ci.com/jmoloko/HBNCrudConsoleApp)
 [![codecov](https://codecov.io/gh/jmoloko/HBNCrudConsoleApp/branch/main/graph/badge.svg?token=O0DQU9I1AI)](https://codecov.io/gh/jmoloko/HBNCrudConsoleApp)
 
 **Console CRUD application with Hibernate**
