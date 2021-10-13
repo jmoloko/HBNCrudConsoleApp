@@ -1,7 +1,7 @@
-package com.milk.consoleapp.model.DAO.implementation;
+package com.milk.consoleapp.model.dao.implementation;
 
-import com.milk.consoleapp.HibernateUtil;
-import com.milk.consoleapp.model.DAO.SkillDAO;
+import com.milk.consoleapp.util.HibernateUtil;
+import com.milk.consoleapp.model.dao.SkillDAO;
 import com.milk.consoleapp.model.entity.Skill;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
@@ -12,8 +12,6 @@ import java.util.List;
  * @author Jack Milk
  */
 public class SkillDAOImpl implements SkillDAO {
-
-    private Transaction transaction = null;
 
     @Override
     public List<Skill> getAll() {
@@ -38,14 +36,11 @@ public class SkillDAOImpl implements SkillDAO {
 
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
 
-            transaction =  session.beginTransaction();
+            Transaction transaction =  session.beginTransaction();
             session.save(skill);
-            session.getTransaction().commit();
+            transaction.commit();
 
         }catch (Exception e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
             e.printStackTrace();
         }
 
@@ -57,14 +52,11 @@ public class SkillDAOImpl implements SkillDAO {
 
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
 
-            transaction =  session.beginTransaction();
+            Transaction transaction =  session.beginTransaction();
             session.update(skill);
-            session.getTransaction().commit();
+            transaction.commit();
 
         }catch (Exception e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
             e.printStackTrace();
         }
 
@@ -77,14 +69,11 @@ public class SkillDAOImpl implements SkillDAO {
 
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
 
-            transaction =  session.beginTransaction();
+            Transaction transaction =  session.beginTransaction();
             session.delete(getById(id));
-            session.getTransaction().commit();
+            transaction.commit();
 
         }catch (Exception e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
             e.printStackTrace();
         }
 

@@ -1,7 +1,7 @@
-package com.milk.consoleapp.model.DAO.impementation;
+package com.milk.consoleapp.model.dao.impementation;
 
 import com.milk.consoleapp.controller.DeveloperController;
-import com.milk.consoleapp.model.DAO.implementation.DeveloperDAOImpl;
+import com.milk.consoleapp.model.dao.implementation.DeveloperDAOImpl;
 import com.milk.consoleapp.model.entity.Developer;
 import com.milk.consoleapp.model.entity.Skill;
 import org.assertj.core.util.Lists;
@@ -24,7 +24,7 @@ import static org.mockito.Mockito.*;
  */
 
 @RunWith(MockitoJUnitRunner.class)
-public class DeveloperDAOImplTest {
+public class DeveloperControllerTest {
 
     @Mock
     private DeveloperDAOImpl developerDAO;
@@ -32,18 +32,21 @@ public class DeveloperDAOImplTest {
     @InjectMocks
     private DeveloperController controller;
 
-    private static final Set<Skill> skills = new HashSet<>();
-    static {
+    private Developer getDeveloper() {
+        return new Developer(1, "John", "Doe", getSkills());
+    }
+    
+    private Set<Skill> getSkills() {
+        Set<Skill> skills = new HashSet<>();
         skills.add(new Skill(1, "Java"));
         skills.add(new Skill(1, "PHP"));
+        return skills;
     }
-
-    Developer developer = new Developer(1, "John", "Doe", skills);
 
     @Test
     public void testGetAllDeveloper() {
 
-        when(developerDAO.getAll()).thenReturn(Lists.newArrayList(developer));
+        when(developerDAO.getAll()).thenReturn(Lists.newArrayList(getDeveloper()));
         assertEquals(1, controller.viewAllDevelopers().size());
         assertEquals("John", controller.viewAllDevelopers().get(0).getFirstName());
         assertEquals("Doe", controller.viewAllDevelopers().get(0).getLastName());
@@ -55,7 +58,7 @@ public class DeveloperDAOImplTest {
     @Test
     public void testGetDeveloperById() {
 
-        when(developerDAO.getById(1)).thenReturn(developer);
+        when(developerDAO.getById(1)).thenReturn(getDeveloper());
         assertEquals(1, (int) controller.viewDeveloperByID(1).getId());
         assertEquals("John", controller.viewDeveloperByID(1).getFirstName());
         assertEquals("Doe", controller.viewDeveloperByID(1).getLastName());
@@ -67,25 +70,25 @@ public class DeveloperDAOImplTest {
     @Test
     public void testSaveDeveloper() {
 
-        when(developerDAO.save(developer)).thenReturn(developer);
-        assertEquals(1, (int) controller.save(developer).getId());
-        assertEquals("John", controller.save(developer).getFirstName());
-        assertEquals("Doe", controller.save(developer).getLastName());
-        assertEquals(2, controller.save(developer).getSkills().size());
+        when(developerDAO.save(getDeveloper())).thenReturn(getDeveloper());
+        assertEquals(1, (int) controller.save(getDeveloper()).getId());
+        assertEquals("John", controller.save(getDeveloper()).getFirstName());
+        assertEquals("Doe", controller.save(getDeveloper()).getLastName());
+        assertEquals(2, controller.save(getDeveloper()).getSkills().size());
 
-        verify(developerDAO, times(4)).save(developer);
+        verify(developerDAO, times(4)).save(getDeveloper());
     }
 
     @Test
     public void testUpdateDeveloper(){
 
-        when(developerDAO.update(developer)).thenReturn(new Developer(1, "Jack", "Milk", skills));
-        assertEquals(1, (int) controller.updateDeveloperForId(developer).getId());
-        assertEquals("Jack", controller.updateDeveloperForId(developer).getFirstName());
-        assertEquals("Milk", controller.updateDeveloperForId(developer).getLastName());
-        assertEquals(2, controller.updateDeveloperForId(developer).getSkills().size());
+        when(developerDAO.update(getDeveloper())).thenReturn(new Developer(1, "Jack", "Milk", getSkills()));
+        assertEquals(1, (int) controller.updateDeveloperForId(getDeveloper()).getId());
+        assertEquals("Jack", controller.updateDeveloperForId(getDeveloper()).getFirstName());
+        assertEquals("Milk", controller.updateDeveloperForId(getDeveloper()).getLastName());
+        assertEquals(2, controller.updateDeveloperForId(getDeveloper()).getSkills().size());
 
-        verify(developerDAO, atMost(5)).update(developer);
+        verify(developerDAO, atMost(5)).update(getDeveloper());
 
     }
 

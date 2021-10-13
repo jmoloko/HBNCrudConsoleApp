@@ -1,4 +1,4 @@
-package com.milk.consoleapp.model.DAO;
+package com.milk.consoleapp.model.dao;
 
 import java.util.List;
 

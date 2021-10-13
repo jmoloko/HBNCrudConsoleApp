@@ -1,6 +1,6 @@
 package com.milk.consoleapp.controller;
 
-import com.milk.consoleapp.model.DAO.TeamDAO;
+import com.milk.consoleapp.model.dao.TeamDAO;
 import com.milk.consoleapp.model.entity.Team;
 
 import java.util.List;

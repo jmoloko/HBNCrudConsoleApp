@@ -1,7 +1,7 @@
-package com.milk.consoleapp.model.DAO.impementation;
+package com.milk.consoleapp.model.dao.impementation;
 
 import com.milk.consoleapp.controller.SkillController;
-import com.milk.consoleapp.model.DAO.implementation.SkillDAOImpl;
+import com.milk.consoleapp.model.dao.implementation.SkillDAOImpl;
 import com.milk.consoleapp.model.entity.Skill;
 import org.assertj.core.util.Lists;
 import org.junit.Test;
@@ -19,7 +19,7 @@ import static org.mockito.Mockito.*;
  */
 
 @RunWith(MockitoJUnitRunner.class)
-public class SkillDAOImplTest {
+public class SkillControllerTest {
 
     @Mock
     private SkillDAOImpl skillDAO;

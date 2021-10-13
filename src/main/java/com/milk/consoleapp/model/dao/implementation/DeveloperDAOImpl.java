@@ -1,11 +1,11 @@
-package com.milk.consoleapp.model.DAO.implementation;
+package com.milk.consoleapp.model.dao.implementation;
 
-import com.milk.consoleapp.HibernateUtil;
-import com.milk.consoleapp.model.DAO.DeveloperDAO;
+import com.milk.consoleapp.util.HibernateUtil;
+import com.milk.consoleapp.model.dao.DeveloperDAO;
 import com.milk.consoleapp.model.entity.Developer;
-import com.milk.consoleapp.model.entity.Skill;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 
 import java.util.List;
 
@@ -14,13 +14,11 @@ import java.util.List;
  */
 public class DeveloperDAOImpl implements DeveloperDAO {
 
-    private Transaction transaction = null;
-
     @Override
     public List<Developer> getAll() {
 
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            return session.createQuery("FROM Developer").list();
+            return session.createQuery("SELECT DISTINCT d FROM Developer d LEFT JOIN FETCH d.skills").list();
         }
 
     }
@@ -29,7 +27,9 @@ public class DeveloperDAOImpl implements DeveloperDAO {
     public Developer getById(Integer id) {
 
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
-            return session.get(Developer.class, id);
+            Query query = session.createQuery("FROM Developer d LEFT JOIN FETCH d.skills WHERE d.id = :id");
+            query.setParameter("id", id);
+            return (Developer) query.getSingleResult();
         }
 
     }
@@ -39,14 +39,11 @@ public class DeveloperDAOImpl implements DeveloperDAO {
 
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
 
-            transaction =  session.beginTransaction();
+            Transaction transaction =  session.beginTransaction();
             session.save(developer);
-            session.getTransaction().commit();
+            transaction.commit();
 
         }catch (Exception e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
             e.printStackTrace();
         }
 
@@ -59,14 +56,12 @@ public class DeveloperDAOImpl implements DeveloperDAO {
 
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
 
-            transaction =  session.beginTransaction();
+            Transaction transaction =  session.beginTransaction();
             session.update(developer);
-            session.getTransaction().commit();
+            transaction.commit();
 
         }catch (Exception e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
+
             e.printStackTrace();
         }
 
@@ -79,14 +74,11 @@ public class DeveloperDAOImpl implements DeveloperDAO {
 
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
 
-            transaction =  session.beginTransaction();
+            Transaction transaction =  session.beginTransaction();
             session.delete(getById(id));
-            session.getTransaction().commit();
+            transaction.commit();
 
         }catch (Exception e) {
-            if (transaction != null) {
-                transaction.rollback();
-            }
             e.printStackTrace();
         }
 

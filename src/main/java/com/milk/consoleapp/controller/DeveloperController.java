@@ -1,6 +1,6 @@
 package com.milk.consoleapp.controller;
 
-import com.milk.consoleapp.model.DAO.DeveloperDAO;
+import com.milk.consoleapp.model.dao.DeveloperDAO;
 import com.milk.consoleapp.model.entity.Developer;
 
 import java.util.List;

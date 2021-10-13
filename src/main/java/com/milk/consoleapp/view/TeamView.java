@@ -2,13 +2,12 @@ package com.milk.consoleapp.view;
 
 import com.milk.consoleapp.controller.DeveloperController;
 import com.milk.consoleapp.controller.TeamController;
-import com.milk.consoleapp.model.DAO.implementation.DeveloperDAOImpl;
-import com.milk.consoleapp.model.DAO.implementation.TeamDAOImpl;
+import com.milk.consoleapp.model.dao.implementation.DeveloperDAOImpl;
+import com.milk.consoleapp.model.dao.implementation.TeamDAOImpl;
 import com.milk.consoleapp.model.entity.Developer;
 import com.milk.consoleapp.model.entity.Skill;
 import com.milk.consoleapp.model.entity.Team;
 
-import java.sql.SQLException;
 import java.util.*;
 import java.util.stream.Collectors;
 

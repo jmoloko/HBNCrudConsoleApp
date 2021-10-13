@@ -27,13 +27,13 @@ public class Developer {
 
     private String lastName;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "dev_skill",
             joinColumns = { @JoinColumn(name = "dev_id") },
             inverseJoinColumns = { @JoinColumn(name = "sk_id") })
     private Set<Skill> skills = new HashSet<>();
 
-    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "developers")
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "developers")
     private Set<Team> teams = new HashSet<>();
 
     public Developer(Integer id, String firstName, String lastName, Set<Skill> skills) {

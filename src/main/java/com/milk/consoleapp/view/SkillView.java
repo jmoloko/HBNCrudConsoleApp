@@ -1,10 +1,9 @@
 package com.milk.consoleapp.view;
 
 import com.milk.consoleapp.controller.SkillController;
-import com.milk.consoleapp.model.DAO.implementation.SkillDAOImpl;
+import com.milk.consoleapp.model.dao.implementation.SkillDAOImpl;
 import com.milk.consoleapp.model.entity.Skill;
 
-import java.sql.SQLException;
 import java.util.Scanner;
 
 /**

@@ -1,4 +1,4 @@
-package com.milk.consoleapp;
+package com.milk.consoleapp.util;
 
 import org.flywaydb.core.Flyway;
 /**

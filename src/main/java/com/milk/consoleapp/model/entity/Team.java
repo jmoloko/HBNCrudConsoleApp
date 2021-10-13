@@ -26,7 +26,7 @@ public class Team {
 
     private String name;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "tm_dev",
             joinColumns = { @JoinColumn(name = "tm_id") },
             inverseJoinColumns = { @JoinColumn(name = "dev_id") })

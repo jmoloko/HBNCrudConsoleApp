@@ -1,6 +1,6 @@
 package com.milk.consoleapp.controller;
 
-import com.milk.consoleapp.model.DAO.SkillDAO;
+import com.milk.consoleapp.model.dao.SkillDAO;
 import com.milk.consoleapp.model.entity.Skill;
 
 import java.util.List;

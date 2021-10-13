@@ -1,7 +1,7 @@
 package com.milk.consoleapp;
 
+import com.milk.consoleapp.util.FlywayUtils;
 import com.milk.consoleapp.view.MainView;
-import org.hibernate.Session;
 
 /**
  * @author Jack Milk

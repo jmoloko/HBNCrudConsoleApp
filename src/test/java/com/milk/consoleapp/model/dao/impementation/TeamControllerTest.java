@@ -1,7 +1,7 @@
-package com.milk.consoleapp.model.DAO.impementation;
+package com.milk.consoleapp.model.dao.impementation;
 
 import com.milk.consoleapp.controller.TeamController;
-import com.milk.consoleapp.model.DAO.implementation.TeamDAOImpl;
+import com.milk.consoleapp.model.dao.implementation.TeamDAOImpl;
 import com.milk.consoleapp.model.entity.Developer;
 import com.milk.consoleapp.model.entity.Skill;
 import com.milk.consoleapp.model.entity.Team;
@@ -24,32 +24,32 @@ import static org.mockito.Mockito.*;
  * @author Jack Milk
  */
 @RunWith(MockitoJUnitRunner.class)
-public class TeamDAOImplTest {
+public class TeamControllerTest {
 
     @Mock
     private TeamDAOImpl teamDAO;
 
     @InjectMocks
     private TeamController controller;
-
-    private static final Set<Skill> skills = new HashSet<>();
-    static {
+    
+    private Set<Developer> getDevelopers(){
+        Set<Skill> skills = new HashSet<>();
         skills.add(new Skill(1, "Java"));
         skills.add(new Skill(1, "PHP"));
-    }
-
-    private static final Set<Developer> developers = new HashSet<>();
-    static {
+        Set<Developer> developers = new HashSet<>();
         developers.add(new Developer(1, "John", "Doe", skills));
         developers.add(new Developer(2, "Mike", "Bar", skills));
+        return developers;
     }
-
-    Team team = new Team(1, "TestTeam", developers);
-
+    
+    private Team getTeam() {
+        return new Team(1, "TestTeam", getDevelopers());
+    }
+    
     @Test
     public void testGetAllTeams(){
 
-        when(teamDAO.getAll()).thenReturn(Lists.newArrayList(team));
+        when(teamDAO.getAll()).thenReturn(Lists.newArrayList(getTeam()));
         assertEquals(1, controller.viewAllTeams().size());
         assertEquals("TestTeam", controller.viewAllTeams().get(0).getName());
         assertEquals(2, controller.viewAllTeams().get(0).getDevelopers().size());
@@ -61,7 +61,7 @@ public class TeamDAOImplTest {
     @Test
     public void testGetTeamById() {
 
-        when(teamDAO.getById(1)).thenReturn(team);
+        when(teamDAO.getById(1)).thenReturn(getTeam());
         assertEquals(1, (int) controller.viewTeamByID(1).getId());
         assertEquals("TestTeam", controller.viewTeamByID(1).getName());
         assertEquals(2, controller.viewTeamByID(1).getDevelopers().size());
@@ -73,12 +73,12 @@ public class TeamDAOImplTest {
     @Test
     public void testSvaTeam() {
 
-        when(teamDAO.save(team)).thenReturn(team);
-        assertEquals(1, (int) controller.save(team).getId());
-        assertEquals("TestTeam", controller.save(team).getName());
-        assertEquals(2, controller.save(team).getDevelopers().size());
+        when(teamDAO.save(getTeam())).thenReturn(getTeam());
+        assertEquals(1, (int) controller.save(getTeam()).getId());
+        assertEquals("TestTeam", controller.save(getTeam()).getName());
+        assertEquals(2, controller.save(getTeam()).getDevelopers().size());
 
-        verify(teamDAO, atMost(5)).save(team);
+        verify(teamDAO, atMost(5)).save(getTeam());
 
     }
 
@@ -86,12 +86,12 @@ public class TeamDAOImplTest {
     @Test
     public void testUpdateTeamById() {
 
-        when(teamDAO.update(team)).thenReturn(new Team(1, "UpdatedTeam", developers));
-        assertEquals(1, (int) controller.updateTeamForId(team).getId());
-        assertEquals("UpdatedTeam", controller.updateTeamForId(team).getName());
-        assertEquals(2, controller.updateTeamForId(team).getDevelopers().size());
+        when(teamDAO.update(getTeam())).thenReturn(new Team(1, "UpdatedTeam", getDevelopers()));
+        assertEquals(1, (int) controller.updateTeamForId(getTeam()).getId());
+        assertEquals("UpdatedTeam", controller.updateTeamForId(getTeam()).getName());
+        assertEquals(2, controller.updateTeamForId(getTeam()).getDevelopers().size());
 
-        verify(teamDAO, atMost(3)).update(team);
+        verify(teamDAO, atMost(3)).update(getTeam());
 
     }
 

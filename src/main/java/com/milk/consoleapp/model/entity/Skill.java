@@ -28,7 +28,7 @@ public class Skill {
 
     private String name;
 
-    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "skills")
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "skills")
     private Set<Developer> developers = new HashSet<>();
 
     public Skill(Integer id, String name) {

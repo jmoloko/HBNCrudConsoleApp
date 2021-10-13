@@ -1,10 +1,12 @@
-package com.milk.consoleapp.model.DAO.implementation;
+package com.milk.consoleapp.model.dao.implementation;
 
-import com.milk.consoleapp.HibernateUtil;
-import com.milk.consoleapp.model.DAO.TeamDAO;
+import com.milk.consoleapp.model.entity.Developer;
+import com.milk.consoleapp.util.HibernateUtil;
+import com.milk.consoleapp.model.dao.TeamDAO;
 import com.milk.consoleapp.model.entity.Team;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 
 import java.util.List;
 
@@ -19,7 +21,7 @@ public class TeamDAOImpl implements TeamDAO {
     public List<Team> getAll() {
 
         try (final Session session = HibernateUtil.getSessionFactory().openSession()) {
-            return session.createQuery("FROM Team ").list();
+            return session.createQuery("SELECT DISTINCT t FROM Team t LEFT JOIN FETCH t.developers d LEFT JOIN FETCH d.skills").list();
         }
 
     }
@@ -28,7 +30,9 @@ public class TeamDAOImpl implements TeamDAO {
     public Team getById(Integer id) {
 
         try (final Session session = HibernateUtil.getSessionFactory().openSession()) {
-            return session.get(Team.class, id);
+            Query query = session.createQuery("FROM Team t LEFT JOIN FETCH t.developers d LEFT JOIN FETCH d.skills WHERE t.id = :id");
+            query.setParameter("id", id);
+            return (Team) query.getSingleResult();
         }
 
     }

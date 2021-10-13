@@ -2,12 +2,11 @@ package com.milk.consoleapp.view;
 
 import com.milk.consoleapp.controller.DeveloperController;
 import com.milk.consoleapp.controller.SkillController;
-import com.milk.consoleapp.model.DAO.implementation.DeveloperDAOImpl;
-import com.milk.consoleapp.model.DAO.implementation.SkillDAOImpl;
+import com.milk.consoleapp.model.dao.implementation.DeveloperDAOImpl;
+import com.milk.consoleapp.model.dao.implementation.SkillDAOImpl;
 import com.milk.consoleapp.model.entity.Developer;
 import com.milk.consoleapp.model.entity.Skill;
 
-import java.sql.SQLException;
 import java.util.*;
 import java.util.stream.Collectors;
 
