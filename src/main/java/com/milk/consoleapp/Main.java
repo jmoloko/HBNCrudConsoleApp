@@ -8,7 +8,7 @@ import com.milk.consoleapp.view.MainView;
  */
 public class Main {
     public static void main(String[] args) {
-//        FlywayUtils.flywayMigrations();
+        FlywayUtils.flywayMigrations();
         MainView.mainView();
     }
 }
